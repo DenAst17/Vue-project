@@ -11,14 +11,19 @@ export default {
       NumDiv1: "",
       NumDiv2: "",
       NumPow1: "",
-      NumPow2: ""
-    }
-  }
+      NumPow2: "",
+    };
+  },
 };
 </script>
 
+<script setup>
+import DefaultHeader from "../components/DefaultHeader.vue";
+</script>
+
 <template>
-  <div class = "calculator">
+  <DefaultHeader />
+  <div class="calculator">
     <div class="calc">
       <input size="number" v-model="NumPlus1" placeholder="Input a number" />
       <p>+</p>
@@ -68,7 +73,7 @@ export default {
   display: flex;
   width: auto;
 }
-.calculator{
+.calculator {
   margin: 0px auto auto 30%;
   width: auto;
 }

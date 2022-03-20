@@ -18,10 +18,26 @@ const router = createRouter({
       component: () => import("../views/AboutView.vue"),
     },
     {
-      path: "/test",
-      name: "test",
-      component: () => import("../views/TestView.vue"),
+      path: "/calculator",
+      name: "calculator",
+      component: () => import("../views/CalcView.vue"),
     },
+    {
+      path: "/starwars/people",
+      name: "starwars_people",
+      component: () => import("../views/StarWarsPeopleView.vue"),
+    },
+    {
+      path: "/starwars/planets",
+      name: "starwars_planets",
+      component: () => import("../views/StarWarsPlanetsView.vue"),
+    },
+    {
+      path: "/starwars/starships",
+      name: "starwars_starships",
+      component: () => import("../views/StarWarsStarshipsView.vue"),
+    },
+    
   ],
 });
 

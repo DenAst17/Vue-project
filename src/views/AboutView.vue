@@ -1,4 +1,9 @@
+<script setup>
+import DefaultHeader from "../components/DefaultHeader.vue";
+</script>
+
 <template>
+  <DefaultHeader />
   <div class="about">
     <h1>This is an about page</h1>
   </div>
