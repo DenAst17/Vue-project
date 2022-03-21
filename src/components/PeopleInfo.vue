@@ -10,7 +10,7 @@ export default {
   },
   methods: {
     addPerson() {
-      this.people.push({ id: id++, text: this.newPerson });
+      this.people.push({ id: id++, text: request.name + " " + request.height });
       this.newPerson = "";
     },
     removePerson(person) {
@@ -22,7 +22,6 @@ export default {
 
 <template>
   <form @submit.prevent="addPerson">
-    <input v-model="newPerson" />
     <button>Add new person</button>
   </form>
   <ol>
