@@ -1,6 +1,6 @@
 <script>
+import * as request from "../request.js";
 let id = 0;
-
 export default {
   data() {
     return {
