@@ -11,7 +11,4 @@ import DefaultHeader from "../components/DefaultHeader.vue";
 </template>
 
 <style>
-  .app{
-    background-color: white;
-  }
 </style>
