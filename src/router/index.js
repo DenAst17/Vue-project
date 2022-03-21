@@ -37,7 +37,6 @@ const router = createRouter({
       name: "starwars_starships",
       component: () => import("../views/StarWarsStarshipsView.vue"),
     },
-    
   ],
 });
 

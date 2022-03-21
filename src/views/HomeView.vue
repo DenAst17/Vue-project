@@ -10,5 +10,4 @@ import DefaultHeader from "../components/DefaultHeader.vue";
   </main>
 </template>
 
-<style>
-</style>
+<style></style>

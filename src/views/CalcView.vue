@@ -80,7 +80,7 @@ import DefaultHeader from "../components/DefaultHeader.vue";
   width: auto;
 }
 
-.calculator input{
-    font-size: 20px;
+.calculator input {
+  font-size: 20px;
 }
 </style>

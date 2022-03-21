@@ -5,7 +5,7 @@ import { RouterLink } from "vue-router";
 <template>
   <header>
     <div class="wrapper">
-      <nav>
+      <nav class="swnav">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/starwars/people">People</RouterLink>
         <RouterLink to="/starwars/planets">Planets</RouterLink>
@@ -35,7 +35,10 @@ nav {
   font-size: 12px;
   text-align: center;
 }
-
+.swnav {
+  display: flex;
+  flex-direction: row;
+}
 nav a.router-link-exact-active {
   color: var(--color-text);
 }
