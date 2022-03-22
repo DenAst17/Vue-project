@@ -11,8 +11,9 @@ export default {
   methods: {
     addPerson() {
       this.requestInfo = "Wait for 5 seconds to get the list";
-      request.getInfo("starships").then(function(value)
+      async function f1()
         {
+          value = await request.getInfo("starships");
           self.requestInfo = "The list of starships (sorted by length):"
           //console.table(value);
           self.people = self.people.filter((t) => t == 'true');
@@ -29,14 +30,12 @@ export default {
             console.log(txt);
             self.people.push({ id: id++, text: txt});
           }
-        });
+        };
+      f1();
       var self = this;
       this.people = people;
       this.people.push({ id: id++, text: 1});
-    },
-    removePerson(person) {
-      
-    },
+    }
   },
 };
 </script>

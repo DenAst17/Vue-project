@@ -11,8 +11,9 @@ export default {
   methods: {
     addPerson() {
       this.requestInfo = "Wait for 5 seconds to get the list";
-      request.getInfo("planets").then(function(value)
+      async function f1()
         {
+          value = await request.getInfo("planets");
           for(let i = 0; i < value.length; i++)
           {
             if(value[i][1] == 0)
@@ -34,14 +35,12 @@ export default {
             console.log(txt);
             self.people.push({ id: id++, text: txt});
           }
-        });
+        };
+        f1();
       var self = this;
       this.people = people;
       this.people.push({ id: id++, text: 1});
-    },
-    removePerson(person) {
-      
-    },
+    }
   },
 };
 </script>

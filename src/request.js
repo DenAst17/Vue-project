@@ -16,6 +16,7 @@ export function getInfo(str){
         else
           height = response.data.length;
         ar.push([name, height]);
+        console.log([name, height]); 
       })
       .catch(error => {
         height = -1;
