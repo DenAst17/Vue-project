@@ -4,6 +4,7 @@ import { RouterLink } from "vue-router";
 
 <template>
   <header>
+    <p class = "header">Star Wars Page!</p>
     <div class="wrapper">
       <nav class="swnav">
         <RouterLink to="/">Home</RouterLink>
@@ -32,12 +33,14 @@ header {
 
 nav {
   width: 100%;
-  font-size: 12px;
   text-align: center;
 }
 .swnav {
   display: flex;
   flex-direction: row;
+}
+.swnav a{
+  font-size:20px;
 }
 nav a.router-link-exact-active {
   color: var(--color-text);
@@ -56,7 +59,12 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-
+.header{
+    display: block;
+    font-size: 2em;
+    margin-block-start: 1em;
+    margin-block-end: 0;
+}
 @media (min-width: 512px) {
   body {
     place-items: center;

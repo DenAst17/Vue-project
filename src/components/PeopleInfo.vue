@@ -4,20 +4,24 @@ let id = 0;
 export default {
   data() {
     return {
-      newPerson: "",
+      requestInfo: "Please, press the button to get request",
       people: [],
     };
   },
   methods: {
     addPerson() {
-      
-      request.getInfo("planets").then(function(value)
+      this.requestInfo = "Wait for 5 seconds to get the list";
+      request.getInfo("people").then(function(value)
         {
+          self.requestInfo = "The list of people (sorted by height):"
           //console.table(value);
           self.people = self.people.filter((t) => t == 'true');
+          value.sort(function(a, b) {
+            return a[1] - b[1];
+          });
           for(let i = 0; i < value.length; i++)
           {
-            let txt = "Name: " + value[i][0] + " height: " + value[i][1];
+            let txt = "Name: " + value[i][0] + ", height: " + value[i][1] + " см";
             console.log(txt);
             self.people.push({ id: id++, text: txt});
           }
@@ -25,7 +29,6 @@ export default {
       var self = this;
       this.people = people;
       this.people.push({ id: id++, text: 1});
-      this.newPerson = "";
     },
     removePerson(person) {
       
@@ -36,7 +39,8 @@ export default {
 
 <template>
   <form @submit.prevent="addPerson">
-    <button>Add new person</button>
+    <button class = "getinfo">Get info</button>
+    <p class = "getinfo">{{requestInfo}}</p>
   </form>
   <ol>
     <li v-for="person in people" :key="person.id">
@@ -44,3 +48,9 @@ export default {
     </li>
   </ol>
 </template>
+
+<style>
+.getinfo{
+  font-size:20px;
+}
+</style>

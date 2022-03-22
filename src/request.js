@@ -2,7 +2,7 @@ import axios from 'axios';
 let name = '';
 let height = -1;
 export function getInfo(str){
-  let people_ar = []; 
+  let ar = []; 
   return new Promise((resolve, reject) => {
     for(let i = 1; i <= 100; i++)
     {
@@ -15,13 +15,13 @@ export function getInfo(str){
           height = response.data.diameter;
         else
           height = response.data.length;
-        people_ar.push([name, height]);
+        ar.push([name, height]);
       })
       .catch(error => {
         height = -1;
       });
     }
-    setTimeout(() => resolve(people_ar), 5000);
+    setTimeout(() => resolve(ar), 5000);
   });
 }
 console.log(123); 
