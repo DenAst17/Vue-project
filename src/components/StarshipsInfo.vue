@@ -5,21 +5,37 @@ export default {
   data() {
     return {
       requestInfo: "Please, press the button to get request",
+      sortedrequestInfo: "",
       people: [],
+      sortedpeople: []      
     };
   },
   methods: {
     addPerson() {
-      this.requestInfo = "Wait for 5 seconds to get the list";
-      request.getInfo("starships").then(function(value)
+      var self = this;
+      this.requestInfo = "Wait for list to download";
+      async function f1()
         {
-          self.requestInfo = "The list of starships (sorted by length):"
-          //console.table(value);
           self.people = self.people.filter((t) => t == 'true');
-          value.sort(function(a, b) {
-            return Number(a[1]) - Number(b[1]);
-          });
-          value[0][1] = 1600;
+          self.sortedpeople = self.sortedpeople.filter((t) => t == 'true');
+          let value = [];
+          for(let i = 0; i < 100; i++)
+          {
+            let response = await request.getInfo("starships", i + 1)
+            if(response == undefined)
+              continue;
+            //console.log(typeof(response));
+            let name = response.data.name;
+            let length = response.data.length;
+            if(length === '1,600')
+              length = 1600;
+            let txt = "Name: " + name + ", length: " + length + " m";
+            value.push([name, length]);
+            self.people.push({ id: id++, text: txt});
+            //console.log([name, length]);
+          }
+          //console.table(value);
+          self.requestInfo = "The list of starships:"
           value.sort(function(a, b) {
             return Number(a[1]) - Number(b[1]);
           });
@@ -27,34 +43,60 @@ export default {
           {
             let txt = "Name: " + value[i][0] + ", length: " + value[i][1] + " m";
             console.log(txt);
-            self.people.push({ id: id++, text: txt});
+            self.sortedpeople.push({ id: id++, text: txt});
           }
-        });
-      var self = this;
+          self.sortedrequestInfo = "The list of starships sorted by length:";
+        };
+      f1();
       this.people = people;
       this.people.push({ id: id++, text: 1});
-    },
-    removePerson(person) {
-      
-    },
+    }
   },
 };
 </script>
 
 <template>
-  <form @submit.prevent="addPerson">
+  <form @submit.prevent="addPerson" class = "btndiv">
     <button class = "getinfo">Get info</button>
-    <p class = "getinfo">{{requestInfo}}</p>
   </form>
-  <ol>
-    <li v-for="person in people" :key="person.id">
-      {{ person.text }}
-    </li>
-  </ol>
+  <div class = 'lists'>
+    <div>
+      <p class = "getinfo">{{requestInfo}}</p>
+      <ol>
+        <li v-for="person in people" :key="person.id">
+          {{ person.text }}
+        </li>
+      </ol>
+    </div>
+    <div>
+      <p class = "getinfo">{{sortedrequestInfo}}</p>
+      <ol>
+        <li v-for="person in sortedpeople" :key="person.id">
+          {{ person.text }}
+        </li>
+      </ol>
+    </div>
+  </div>
+  
 </template>
 
 <style>
+.btndiv{
+  display:flex;
+  width: 86.05px;
+  margin-left: auto;
+  margin-right: auto;
+  align-content: center;
+  align-items: center;
+}
 .getinfo{
   font-size:20px;
+}
+.lists{
+  display:flex;
+  width: 767.62px;
+  margin-left: auto;
+  margin-right: auto;
+  display:flex;
 }
 </style>
