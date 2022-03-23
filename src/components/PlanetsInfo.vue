@@ -35,7 +35,7 @@ export default {
             //console.log([name, diameter]);
           }
           //console.table(value);
-          self.requestInfo = "The list of planets:"
+          self.requestInfo = "The list of planets"
           value.sort(function(a, b) {
             if(a[1] == 'unknown' && b[1] != 'unknown')
               return 1000000000 - b[1];
@@ -49,7 +49,7 @@ export default {
             console.log(txt);
             self.sortedpeople.push({ id: id++, text: txt});
           }
-          self.sortedrequestInfo = "The list of planets sorted by diameter:";
+          self.sortedrequestInfo = "The list of planets sorted by diameter";
         };
       f1();
       this.people = people;
@@ -63,7 +63,7 @@ export default {
   <form @submit.prevent="addPerson" class = "btndiv">
     <button class = "getinfo">Get info</button>
   </form>
-  <div class = 'lists'>
+  <div class = 'planetslists'>
     <div>
       <p class = "getinfo">{{requestInfo}}</p>
       <ol>
@@ -96,7 +96,7 @@ export default {
 .getinfo{
   font-size:20px;
 }
-.lists{
+.planetslists{
   display:flex;
   width: 692.72px;
   margin-left: auto;

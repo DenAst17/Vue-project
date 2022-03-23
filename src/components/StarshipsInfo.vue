@@ -35,7 +35,7 @@ export default {
             //console.log([name, length]);
           }
           //console.table(value);
-          self.requestInfo = "The list of starships:"
+          self.requestInfo = "The list of starships"
           value.sort(function(a, b) {
             return Number(a[1]) - Number(b[1]);
           });
@@ -45,7 +45,7 @@ export default {
             console.log(txt);
             self.sortedpeople.push({ id: id++, text: txt});
           }
-          self.sortedrequestInfo = "The list of starships sorted by length:";
+          self.sortedrequestInfo = "The list of starships sorted by length";
         };
       f1();
       this.people = people;
@@ -59,7 +59,7 @@ export default {
   <form @submit.prevent="addPerson" class = "btndiv">
     <button class = "getinfo">Get info</button>
   </form>
-  <div class = 'lists'>
+  <div class = 'starshipslists'>
     <div>
       <p class = "getinfo">{{requestInfo}}</p>
       <ol>
@@ -92,7 +92,7 @@ export default {
 .getinfo{
   font-size:20px;
 }
-.lists{
+.starshipslists{
   display:flex;
   width: 767.62px;
   margin-left: auto;

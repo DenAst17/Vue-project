@@ -33,7 +33,7 @@ export default {
             //console.log([name, height]);
           }
           //console.table(value);
-          self.requestInfo = "The list of people:"
+          self.requestInfo = "The list of people"
           value.sort(function(a, b) {
             return a[1] - b[1];
           });
@@ -57,7 +57,7 @@ export default {
   <form @submit.prevent="addPerson" class = "btndiv">
     <button class = "getinfo">Get info</button>
   </form>
-  <div class = 'lists'>
+  <div class = 'peoplelists'>
     <div>
       <p class = "getinfo">{{requestInfo}}</p>
       <ol>
@@ -90,7 +90,7 @@ export default {
 .getinfo{
   font-size:20px;
 }
-.lists{
+.peoplelists{
   display:flex;
   width: 639.16px;
   margin-left: auto;
