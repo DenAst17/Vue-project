@@ -19,20 +19,23 @@ export default {
           self.people = self.people.filter((t) => t == 'true');
           self.sortedpeople = self.sortedpeople.filter((t) => t == 'true');
           let value = [];
-          for(let i = 0; i < 100; i++)
+          let nextPageExist = true;
+          let response = await request.getAll("https://swapi.dev/api/starships");
+          while(nextPageExist)
           {
-            let response = await request.getInfo("starships", i + 1)
-            if(response == undefined)
-              continue;
-            //console.log(typeof(response));
-            let name = response.data.name;
-            let length = response.data.length;
-            if(length === '1,600')
+            for(let starship of response.data.results)
+            {
+              let name = starship.name;
+              let length = starship.length;
+              if(length === '1,600')
               length = 1600;
-            let txt = "Name: " + name + ", length: " + length + " m";
-            value.push([name, length]);
-            self.people.push({ id: id++, text: txt});
-            //console.log([name, length]);
+              let txt = "Name: " + name + ", length: " + length + " m";
+              value.push([name, length]);
+              self.people.push({ id: id++, text: txt});
+            }
+            if(response.data.next == null)
+              break;
+            response = await request.getAll(response.data.next);
           }
           //console.table(value);
           self.requestInfo = "The list of starships"

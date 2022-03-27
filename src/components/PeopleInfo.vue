@@ -19,18 +19,21 @@ export default {
           self.people = self.people.filter((t) => t == 'true');
           self.sortedpeople = self.sortedpeople.filter((t) => t == 'true');
           let value = [];
-          for(let i = 0; i < 100; i++)
+          let nextPageExist = true;
+          let response = await request.getAll("https://swapi.dev/api/people");
+          while(nextPageExist)
           {
-            let response = await request.getInfo("people", i + 1)
-            if(response == undefined)
-              continue;
-            //console.log(typeof(response));
-            let name = response.data.name;
-            let height = response.data.height;
-            let txt = "Name: " + name + ", height: " + height + " см";
-            value.push([name, height]);
-            self.people.push({ id: id++, text: txt});
-            //console.log([name, height]);
+            for(let person of response.data.results)
+            {
+              let name = person.name;
+              let height = person.height;
+              let txt = "Name: " + name + ", height: " + height + " см";
+              value.push([name, height]);
+              self.people.push({ id: id++, text: txt});
+            }
+            if(response.data.next == null)
+              break;
+            response = await request.getAll(response.data.next);
           }
           //console.table(value);
           self.requestInfo = "The list of people"
@@ -46,8 +49,6 @@ export default {
           self.sortedrequestInfo = "The list of people sorted by height";
         };
       f1();
-      this.people = people;
-      this.people.push({ id: id++, text: 1});
     }
   },
 };

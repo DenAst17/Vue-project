@@ -21,6 +21,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/calculator">Calculator</RouterLink>
         <RouterLink to="/starwars/people">StarWars</RouterLink>
+        <RouterLink to="/users">Users</RouterLink>
       </nav>
     </div>
   </header>

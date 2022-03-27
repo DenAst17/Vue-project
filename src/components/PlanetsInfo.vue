@@ -19,20 +19,23 @@ export default {
           self.people = self.people.filter((t) => t == 'true');
           self.sortedpeople = self.sortedpeople.filter((t) => t == 'true');
           let value = [];
-          for(let i = 0; i < 100; i++)
+          let nextPageExist = true;
+          let response = await request.getAll("https://swapi.dev/api/planets");
+          while(nextPageExist)
           {
-            let response = await request.getInfo("planets", i + 1)
-            if(response == undefined)
-              continue;
-            //console.log(typeof(response));
-            let name = response.data.name;
-            let diameter = response.data.diameter;
-            if(diameter == 0)
-              diameter = 'unknown';
-            let txt = "Name: " + name + ", diameter: " + diameter + " km";
-            value.push([name, diameter]);
-            self.people.push({ id: id++, text: txt});
-            //console.log([name, diameter]);
+            for(let planet of response.data.results)
+            {
+              let name = planet.name;
+              let diameter = planet.diameter;
+              if(diameter == 0)
+                diameter = 'unknown';
+              let txt = "Name: " + name + ", diameter: " + diameter + " km";
+              value.push([name, diameter]);
+              self.people.push({ id: id++, text: txt});
+            }
+            if(response.data.next == null)
+              break;
+            response = await request.getAll(response.data.next);
           }
           //console.table(value);
           self.requestInfo = "The list of planets"
@@ -98,7 +101,7 @@ export default {
 }
 .planetslists{
   display:flex;
-  width: 692.72px;
+  width: 698.56px;
   margin-left: auto;
   margin-right: auto;
   display:flex;

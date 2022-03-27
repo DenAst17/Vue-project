@@ -37,6 +37,11 @@ const router = createRouter({
       name: "starwars_starships",
       component: () => import("../views/StarWarsStarshipsView.vue"),
     },
+    {
+      path: "/users",
+      name: "users",
+      component: () => import("../views/UsersView.vue"),
+    }
   ],
 });
 
