@@ -26,15 +26,17 @@ export default {
   },
   components: {
       DefaultHeader,
+  },
+  mounted(){
+    this.addInfo();
   }
 };
 </script>
 
 <template>
   <DefaultHeader />
-  <button @click="addInfo">Start</button>
   <p v-for="i in info" :key="i.id">{{i}}</p>
-  <p v-for="i in info" :key="i.id"> id = {{Object.values(i)[0]}} </p>
+  <p v-for="i in info" :key="i.id"> name = {{Object.values(i)[1]}} </p>
 </template>
 
 <style>

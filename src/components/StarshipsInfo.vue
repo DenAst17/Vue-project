@@ -51,17 +51,15 @@ export default {
           self.sortedrequestInfo = "The list of starships sorted by length";
         };
       f1();
-      this.people = people;
-      this.people.push({ id: id++, text: 1});
     }
   },
+  mounted(){
+    this.addPerson();
+  }
 };
 </script>
 
 <template>
-  <form @submit.prevent="addPerson" class = "btndiv">
-    <button class = "getinfo">Get info</button>
-  </form>
   <div class = 'starshipslists'>
     <div>
       <p class = "getinfo">{{requestInfo}}</p>
