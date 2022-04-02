@@ -6,6 +6,9 @@ export default {
   data() {
     return {
       info: [{id: 1, name: "Vlad", email: "vlad@ukr.net"}],
+      UserName: "",
+      UserEmail: "",
+      UserId: undefined
     };
   },
   methods: {
@@ -14,20 +17,65 @@ export default {
     },
     addInfo(){
         //throw new Error("error!");
-        this.info = [];
         let result;
         request.getAll("http://localhost:3000/users").then(response => {
             if(response != undefined)
-              for(let person of response.data)
-                this.info.push(person);
+            {
+              this.info = response.data;
+            }
         }
         )
+    },
+    deleteInfo(item){
+      request.deleteSingle("http://localhost:3000/users", item.id).then(response => {
+        this.addInfo();
+      });
+    },
+    postInfo(){
+      request.postSingle("http://localhost:3000/users", {name: this.UserName, email: this.UserEmail}).then(response => {
+        this.addInfo();
+        this.UserName = "";
+        this.UserEmail = "";
+      });
+    },
+    editInfo(item)
+    {
+      this.UserName = item.name;
+      this.UserEmail = item.email;
+      this.UserId = item.id;
+    },
+    updateInfo(){
+      if(this.UserId){
+        request.updateSingle("http://localhost:3000/users", this.UserId, {name: this.UserName, email: this.UserEmail}).then(response => {
+        this.UserName = "";
+        this.UserEmail = "";
+        this.addInfo();
+        this.UserId = undefined;
+      });
+      }
+    },
+    filterInfo(){
+      request.getAll("http://localhost:3000/users").then(response => {
+        if(response != undefined)
+        {
+          this.info = response.data;
+        }
+        }).then(response => {
+          if(this.UserName)
+          {
+            this.info = this.info.filter((item) => item.name.includes(this.UserName));            
+          }
+          if(this.UserEmail)
+          {
+            this.info = this.info.filter((item) => item.email.includes(this.UserEmail));
+          }
+        })
     }
   },
   components: {
       DefaultHeader,
   },
-  mounted(){
+  created(){
     this.addInfo();
   }
 };
@@ -35,11 +83,40 @@ export default {
 
 <template>
   <DefaultHeader />
-  <p v-for="i in info" :key="i.id">{{i}}</p>
-  <p v-for="i in info" :key="i.id"> name = {{Object.values(i)[1]}} </p>
+  <div class = "post">
+    <button @click="postInfo()">Post</button>
+    <button @click="updateInfo()">Update</button>
+    <button @click="filterInfo()">Filter</button>
+    Name<input v-model = "UserName"/>
+    E-mail<input v-model = "UserEmail"/>
+  </div>
+  <table class = "people">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>E-mail</th>
+    </tr>
+    <tr v-for="item in info" :key="item.id">
+      <td>{{item.id}}</td>
+      <td>{{item.name}} </td>
+      <td>{{item.email}} </td>
+      <td><button @click="deleteInfo(item)">X</button> </td>
+      <td><button @click="editInfo(item)">edit</button> </td>
+    </tr>
+  </table>
 </template>
 
 <style>
+.post{
+  display:flex;
+  flex-direction:column;
+  width: 15%;
+  margin: auto;
+}
+.people{
+  margin: auto;
+  width: 15%;
+}
 @media (min-width: 1024px) {
   .about {
     min-height: 100vh;
