@@ -6,15 +6,17 @@
     "build": "vite build",
     "preview": "vite preview --port 5050",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "dblaunch": "json-server --watch db.json" 
+    "dblaunch": "json-server --watch db.json"
   },
   "dependencies": {
     "axios": "^0.26.1",
+    "firebase": "^9.6.10",
     "http": "^0.0.1-security",
     "lodash": "^4.17.21",
     "request": "^2.88.2",
     "vue": "^3.2.31",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",

@@ -2,6 +2,7 @@
 import DefaultHeader from "../components/DefaultHeader.vue";
 import axios from "axios";
 import * as request from "../request.js";
+import UserInfoRow from "../components/UserInfoRow.vue";
 export default {
   data() {
     return {
@@ -70,11 +71,17 @@ export default {
             this.info = this.info.filter((item) => item.email.includes(this.UserEmail));
           }
         })
+    },
+    increment(){
+      this.$store.commit('increment');
+      
+      console.log(this.$store.state.count);
     }
   },
   components: {
-      DefaultHeader,
-  },
+    DefaultHeader,
+    UserInfoRow
+},
   created(){
     this.addInfo();
   }
@@ -87,6 +94,7 @@ export default {
     <button @click="postInfo()">Post</button>
     <button @click="updateInfo()">Update</button>
     <button @click="filterInfo()">Filter</button>
+    <button @click="increment()">Increment</button>
     Name<input v-model = "UserName"/>
     E-mail<input v-model = "UserEmail"/>
   </div>
@@ -96,13 +104,9 @@ export default {
       <th>Name</th>
       <th>E-mail</th>
     </tr>
-    <tr v-for="item in info" :key="item.id">
-      <td>{{item.id}}</td>
-      <td>{{item.name}} </td>
-      <td>{{item.email}} </td>
-      <td><button @click="deleteInfo(item)">X</button> </td>
-      <td><button @click="editInfo(item)">edit</button> </td>
-    </tr>
+    <template v-for="item in info" :key="item.id">
+      <UserInfoRow v-bind:user="item" @remove="user => deleteInfo(user)" @edit="editInfo"/>
+    </template>
   </table>
 </template>
 

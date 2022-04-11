@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import { store } from "../store/store";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +42,15 @@ const router = createRouter({
       path: "/users",
       name: "users",
       component: () => import("../views/UsersView.vue"),
+      beforeEnter: (to, from) => {
+        if(!store.state.loginInfo)
+          router.push({name: "login"});
+      },
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import("../views/LoginView.vue"),
     }
   ],
 });
