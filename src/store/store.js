@@ -4,7 +4,8 @@ const store = createStore({
     state () {
       return {
         count: 0,
-        loginInfo: undefined
+        loginInfo: undefined,
+        info: [{id: 1, name: "Vlad", email: "vlad@ukr.net"}]
       }
     },
     mutations: {

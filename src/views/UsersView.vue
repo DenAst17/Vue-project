@@ -3,6 +3,7 @@ import DefaultHeader from "../components/DefaultHeader.vue";
 import axios from "axios";
 import * as request from "../request.js";
 import UserInfoRow from "../components/UserInfoRow.vue";
+import { store } from "../store/store";
 export default {
   data() {
     return {
@@ -22,7 +23,8 @@ export default {
         request.getAll("http://localhost:3000/users").then(response => {
             if(response != undefined)
             {
-              this.info = response.data;
+              store.state.info = response.data;
+              console.log(store.state.info[0]);
             }
         }
         )
@@ -59,29 +61,29 @@ export default {
       request.getAll("http://localhost:3000/users").then(response => {
         if(response != undefined)
         {
-          this.info = response.data;
+          store.state.info = response.data;
         }
         }).then(response => {
           if(this.UserName)
           {
-            this.info = this.info.filter((item) => item.name.includes(this.UserName));            
+            store.state.info = store.state.info.filter((item) => item.name.includes(this.UserName));            
           }
           if(this.UserEmail)
           {
-            this.info = this.info.filter((item) => item.email.includes(this.UserEmail));
+            store.state.info = store.state.info.filter((item) => item.email.includes(this.UserEmail));
           }
         })
     },
     increment(){
       this.$store.commit('increment');
       
-      console.log(this.$store.state.count);
+      console.log(store.state.count);
     }
   },
   components: {
     DefaultHeader,
     UserInfoRow
-},
+  },
   created(){
     this.addInfo();
   }
@@ -104,7 +106,7 @@ export default {
       <th>Name</th>
       <th>E-mail</th>
     </tr>
-    <template v-for="item in info" :key="item.id">
+    <template v-for="item in $store.state.info" :key="item.id">
       <UserInfoRow v-bind:user="item" @remove="user => deleteInfo(user)" @edit="editInfo"/>
     </template>
   </table>

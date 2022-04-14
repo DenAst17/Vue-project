@@ -1,10 +1,46 @@
-<script setup>
+<script>
 import { RouterLink } from "vue-router";
 import HelloWorld from "@/components/HelloWorld.vue";
+import { store } from "../store/store";
+export default {
+  data() {
+    return {
+      isLogin: false,
+      displayLoginInfo: ""
+    }
+  },
+
+  components: {
+    HelloWorld
+  },
+  mounted(){
+    console.log(123);
+    if(store.state.loginInfo != undefined)
+    {
+      this.isLogin = true;
+      this.$refs.h.textContent = store.state.loginInfo.displayName;
+      this.$refs.userIMG.src = store.state.loginInfo.photoURL;
+      //console.log(store.state.loginInfo);
+    }
+  },
+  created(){
+  }
+}
 </script>
 
 <template>
   <header>
+    <div class = "profile">
+      <div v-show="isLogin" class = "userInfo">
+        <img 
+          ref = "userIMG"
+          width="70"
+          height="70"
+        />
+        <h2 ref="h"></h2>
+      </div>
+      <RouterLink to="/profile">Profile</RouterLink>
+    </div>
     <img
       alt="Vue logo"
       class="logo"
@@ -12,7 +48,6 @@ import HelloWorld from "@/components/HelloWorld.vue";
       width="125"
       height="125"
     />
-
     <div class="wrapper">
       <HelloWorld msg="My Vue Project!" />
 
@@ -90,7 +125,7 @@ nav a:first-of-type {
   }
 
   #app {
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
 
   header {
@@ -118,5 +153,12 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+}
+.userInfo{
+  display: flex;
+}
+.profile{
+  width: 136.4px;
+  margin-left: auto;
 }
 </style>
