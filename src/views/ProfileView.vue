@@ -7,8 +7,8 @@ export default {
 </script>
 
 <template>
-    <div class="about">
-        <h1></h1>
+    <div class="profileInfo">
+        <h1>Your profile info</h1>
         <div>
             <h2>Name: {{$store.state.info[0].name}}</h2>
             <h2>Email: {{$store.state.info[0].email}}</h2>
@@ -19,10 +19,8 @@ export default {
 </template>
 
 <style>
-@media (min-width: 1024px) {
-    .about {
-        min-height: 100vh;
-        display: flex;
-    }
+.profileInfo{
+    margin: 0 auto;
+    width: 300px;
 }
 </style>

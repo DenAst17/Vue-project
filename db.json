@@ -1,16 +1,6 @@
 {
   "users": [
     {
-      "name": "Vlad",
-      "email": "vlad1@ukr.net",
-      "id": 3
-    },
-    {
-      "name": "Vlad",
-      "email": "vlad@ukr.net",
-      "id": 4
-    },
-    {
       "name": "Denis",
       "email": "den@ukr.net\t",
       "id": 6
@@ -19,6 +9,11 @@
       "name": "Denis",
       "email": "den2@ukr.net",
       "id": 7
+    },
+    {
+      "name": "Vlad",
+      "email": "vlad@ukr.net",
+      "id": 8
     }
   ]
 }

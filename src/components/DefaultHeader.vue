@@ -30,24 +30,30 @@ export default {
 
 <template>
   <header>
-    <div class = "profile">
-      <div v-show="isLogin" class = "userInfo">
-        <img 
-          ref = "userIMG"
-          width="70"
-          height="70"
-        />
-        <h2 ref="h"></h2>
+      <img
+        alt="Vue logo"
+        class="logo"
+        src="../assets/Vuelogo.png"
+        width="125"
+        height="125"
+      />
+      
+      <div v-show="isLogin" class = "profile">
+        <div class = "userInfo">
+          <img 
+            ref = "userIMG"
+            width="70"
+            height="70"
+          />
+          <h2 ref="h"></h2>
+        </div>
+        <RouterLink to="/profile">Profile</RouterLink>
       </div>
-      <RouterLink to="/profile">Profile</RouterLink>
-    </div>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="../assets/Vuelogo.png"
-      width="125"
-      height="125"
-    />
+
+      <div v-show="!isLogin" class = "login">
+        <RouterLink to="/login">Login</RouterLink>
+      </div>
+
     <div class="wrapper">
       <HelloWorld msg="My Vue Project!" />
 
@@ -71,13 +77,9 @@ header {
   line-height: 1.5;
   max-height: 200vh;
 }
-
-.logo {
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto 2rem;
+.logo{
+  width:125px;
 }
-
 a,
 .green {
   text-decoration: none;
@@ -141,10 +143,6 @@ nav a:first-of-type {
     flex-wrap: wrap;
   }
 
-  .logo {
-    margin: 0 0 0 0;
-  }
-
   nav {
     text-align: left;
     margin-left: -1rem;
@@ -159,6 +157,19 @@ nav a:first-of-type {
 }
 .profile{
   width: 136.4px;
-  margin-left: auto;
+  right:5px;
+  position: absolute;
+  position: fixed;
+}
+.login{
+  width: 70px;
+  right:0%;
+  position: absolute;
+  position: fixed;
+  font-size: 20px;
+}
+.upperHeader{
+  display: flex;
+  width: 100%;
 }
 </style>
