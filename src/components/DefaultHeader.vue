@@ -61,6 +61,7 @@ export default {
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/calculator">Calculator</RouterLink>
+        <RouterLink to="/tictactoe">TicTacToe</RouterLink>
         <RouterLink to="/starwars/people">StarWars</RouterLink>
         <RouterLink to="/users">Users</RouterLink>
       </nav>
