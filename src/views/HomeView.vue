@@ -6,7 +6,6 @@ import DefaultHeader from "../components/DefaultHeader.vue";
 <template>
   <main>
     <DefaultHeader />
-    <TheWelcome />
   </main>
 </template>
 
